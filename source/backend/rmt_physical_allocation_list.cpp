@@ -76,7 +76,6 @@ RmtErrorCode RmtPhysicalAllocationListAddAllocation(RmtPhysicalAllocationList* p
     RMT_ASSERT(physical_allocation_list);
     RMT_RETURN_ON_ERROR(physical_allocation_list, kRmtErrorInvalidPointer);
     RMT_RETURN_ON_ERROR(size_in_4kb_pages, kRmtErrorInvalidSize);
-    RMT_RETURN_ON_ERROR((address >> 12) + size_in_4kb_pages < RMT_PAGE_TABLE_MAX_SIZE, kRmtErrorInvalidSize);
 
     const int32_t next_allocation_index = physical_allocation_list->allocation_count++;
 

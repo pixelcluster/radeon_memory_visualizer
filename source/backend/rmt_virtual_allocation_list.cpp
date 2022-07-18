@@ -392,7 +392,6 @@ RmtErrorCode RmtVirtualAllocationListAddAllocation(RmtVirtualAllocationList* vir
     RMT_ASSERT(virtual_allocation_list);
     RMT_RETURN_ON_ERROR(virtual_allocation_list, kRmtErrorInvalidPointer);
     RMT_RETURN_ON_ERROR(size_in_4kb_pages, kRmtErrorInvalidSize);
-    RMT_RETURN_ON_ERROR((address >> 12) + size_in_4kb_pages < RMT_PAGE_TABLE_MAX_SIZE, kRmtErrorInvalidSize);
     RMT_RETURN_ON_ERROR(virtual_allocation_list->allocation_count < virtual_allocation_list->total_allocations, kRmtErrorOutOfMemory);
 
     // check if this region overlaps an existing region
@@ -461,6 +460,8 @@ RmtErrorCode RmtVirtualAllocationListRemoveAllocation(RmtVirtualAllocationList* 
     {
         return kRmtErrorNoAllocationFound;
     }
+
+    if(current_allocation_interval->dead) return kRmtOk;
 
     // mark the allocation as dead, the allocation will then be removed later on
     // when the resource pointers are set on the allocation. Removal of allocations
