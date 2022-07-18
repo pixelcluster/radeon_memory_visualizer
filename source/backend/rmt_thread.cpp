@@ -9,6 +9,7 @@
 #include <thread>
 #endif  // #ifndef _WIN32
 
+#include <new>
 #include <stdint.h>
 #include <rmt_assert.h>
 #include "rmt_thread.h"
